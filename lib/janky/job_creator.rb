@@ -78,7 +78,7 @@ module Janky
         end
 
         get = Net::HTTP::Get.new("#{path}/job/#{name}/")
-        get.basic_auth(user, pass) if user && pass
+        get.basic_auth(URI.unescape(user), URI.unescape(pass)) if user && pass
         response = http.request(get)
 
         case response.code
@@ -103,7 +103,7 @@ module Janky
         end
 
         post = Net::HTTP::Post.new("#{path}/createItem?name=#{name}")
-        post.basic_auth(user, pass) if user && pass
+        post.basic_auth(URI.unescape(user), URI.unescape(pass)) if user && pass
         post["Content-Type"] = "application/xml"
         post.body = config
 

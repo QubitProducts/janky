@@ -14,7 +14,7 @@ module Janky
 
         request  = Net::HTTP::Post.new(create_url.path)
         if @username && @password
-          request.basic_auth(@username, @password)
+          request.basic_auth(URI.unescape(@username), URI.unescape(@password))
         end
         request.form_data = {"json" => params}
 

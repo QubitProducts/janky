@@ -33,7 +33,11 @@ module Janky
           repo.update_attributes!(:uri => uri, :job_template => template)
           repo
         else
-          Repository.create!(:name => name, :uri => uri, :job_template => template)
+          Repository.create!(
+            :name => name,
+            :uri => uri,
+            :job_template => template,
+            :enabled => !ENV.has_key?("JANKY_DISABLE_AUTO_BUILD"))
         end
 
       repo.setup

@@ -152,6 +152,7 @@ Required settings:
 * `JANKY_GITHUB_HOOK_SECRET`: Secret used to sign hook requests from
   GitHub.
 * `JANKY_CHAT_DEFAULT_ROOM`: Chat room where notifications are sent by default.
+* `JANKY_DISABLE_AUTO_BUILD`: Disable automatic builds by default
 
 Optional database settings:
 

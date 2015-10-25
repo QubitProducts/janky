@@ -37,8 +37,14 @@ module Janky
       branch  = repo.branch_for(branch_name)
       room_id = (params["room_id"] rescue nil)
       user    = params["user"]
-      build   = branch.head_build_for(room_id, user)
-      build ||= repo.build_sha(branch_name, user, room_id)
+      build_params = {}
+      params.foreach do |key, value|
+        if mtch = key.match(/^build_(.*)$/)
+          build_params[mtch.captures[0]] = value
+        end
+      end
+      build   = branch.head_build_for(room_id, user, build_params)
+      build ||= repo.build_sha(branch_name, user, room_id, build_params)
 
       if build
         build.run

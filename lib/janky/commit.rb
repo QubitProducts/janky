@@ -7,7 +7,7 @@ module Janky
       builds.last
     end
 
-    def build!(user, room_id = nil, compare = nil)
+    def build!(user, room_id = nil, compare = nil, parameters = {})
       compare = repository.github_url("compare/#{sha1}^...#{sha1}")
 
       room_id = room_id.to_s
@@ -16,11 +16,12 @@ module Janky
       end
 
       builds.create!(
-        :compare   => compare,
-        :user      => user,
-        :commit    => self,
-        :room_id   => room_id,
-        :branch_id => repository.branch_for('master').id
+        :compare    => compare,
+        :user       => user,
+        :commit     => self,
+        :room_id    => room_id,
+        :branch_id  => repository.branch_for('master').id,
+        :parameters => parameters
       )
     end
   end

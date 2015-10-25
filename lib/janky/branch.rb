@@ -61,7 +61,7 @@ module Janky
     #           the repository.
     #
     # Returns the newly created Janky::Build.
-    def build_for(commit, user, room_id = nil, compare = nil)
+    def build_for(commit, user, room_id = nil, compare = nil, parameters = {})
       if compare.nil? && build = commit.last_build
         compare = build.compare
       end
@@ -72,22 +72,24 @@ module Janky
       end
 
       builds.create!(
-        :compare => compare,
-        :user    => user,
-        :commit  => commit,
-        :room_id => room_id
+        :compare    => compare,
+        :user       => user,
+        :commit     => commit,
+        :room_id    => room_id,
+        :parameters => parameters
       )
     end
 
     # Fetch the HEAD commit of this branch using the GitHub API and create a
     # build and commit record.
     #
-    # room_id - See build_for documentation. This is passed as is to the
-    #           build_for method.
-    # user    - Ditto.
+    # room_id    - See build_for documentation. This is passed as is to the
+    #              build_for method.
+    # user       - Ditto.
+    # parameters - Ditto.
     #
     # Returns the newly created Janky::Build.
-    def head_build_for(room_id, user)
+    def head_build_for(room_id, user, parameters)
       sha_to_build = GitHub.branch_head_sha(repository.nwo, name)
       return if !sha_to_build
 
@@ -95,7 +97,7 @@ module Janky
 
       current_sha = current_build ? current_build.sha1 : "#{sha_to_build}^"
       compare_url = repository.github_url("compare/#{current_sha}...#{commit.sha1}")
-      build_for(commit, user, room_id, compare_url)
+      build_for(commit, user, room_id, compare_url, parameters)
     end
 
     # The current build, e.g. the most recent one.

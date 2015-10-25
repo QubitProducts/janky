@@ -111,10 +111,10 @@ module Janky
     # compare - optional String GitHub Compare View URL. Defaults to the
     #
     # Returns the newly created Janky::Build
-    def build_sha(sha1, user, room_id = nil, compare = nil)
+    def build_sha(sha1, user, room_id = nil, compare = nil, parameters = {})
       return nil unless sha1 =~ /^[0-9a-fA-F]{7,40}$/
       commit = commit_for_sha(sha1)
-      commit.build!(user, room_id, compare)
+      commit.build!(user, room_id, compare, parameters)
     end
 
     # Jenkins host executing this repo's builds.

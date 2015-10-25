@@ -2,6 +2,7 @@ module Janky
   class Build < ActiveRecord::Base
     belongs_to :branch
     belongs_to :commit
+    serialize :parameters
 
     default_scope do
       columns = (column_names - ["output"]).map do |column_name|

@@ -34,7 +34,7 @@ module Janky
 
         request  = Net::HTTP::Get.new(url.path)
         if @username && @password
-          request.basic_auth(@username, @password)
+          request.basic_auth(URI.unescape(@username), URI.unescape(@password))
         end
 
         response = http.request(request)

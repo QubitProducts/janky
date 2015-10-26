@@ -23,7 +23,7 @@ module Janky
           { :name => "JANKY_BRANCH", :value => @build.branch_name },
           { :name => "JANKY_ID",     :value => @build.id }
         ]
-        @build.parameters.foreach do |key, value|
+        @build.parameters.each do |key, value|
           params.append({ :name => key, :value => value })
         end
         Yajl.dump(:parameter => params)

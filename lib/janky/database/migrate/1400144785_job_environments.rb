@@ -1,5 +1,5 @@
-class AddJobEnvironments < ActiveRecord::Migration
+class JobEnvironments < ActiveRecord::Migration
   def change
-    add_column :repositories, :parameters, :text
+    add_column :builds, :parameters, :text
   end
 end

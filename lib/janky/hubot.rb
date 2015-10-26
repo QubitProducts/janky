@@ -38,7 +38,7 @@ module Janky
       room_id = (params["room_id"] rescue nil)
       user    = params["user"]
       build_params = {}
-      params.foreach do |key, value|
+      params.each do |key, value|
         if mtch = key.match(/^build_(.*)$/)
           build_params[mtch.captures[0]] = value
         end

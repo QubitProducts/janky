@@ -236,12 +236,7 @@ module Janky
     #
     # Returns a String hash of this Repository name and uri.
     def job_name
-      md5 = Digest::MD5.new
-      md5 << name
-      md5 << uri
-      md5 << job_config_path.read
-      md5 << builder.callback_url.to_s
-      "#{name}-#{md5.hexdigest[0,12]}"
+      name
     end
   end
 end

@@ -114,9 +114,6 @@ module Janky
 
       if response.code == "201"
         Yajl.load(response.body)["url"]
-      else
-        Exception.push_http_response(response)
-        raise Error, "Failed to create hook"
       end
     end
 

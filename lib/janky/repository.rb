@@ -187,7 +187,9 @@ module Janky
       delete_hook
 
       url = GitHub.hook_create("#{github_owner}/#{github_name}")
-      update_attributes!(:hook_url => url)
+      if url
+        update_attributes!(:hook_url => url)
+      end
     end
 
     def delete_hook

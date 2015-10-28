@@ -17,6 +17,9 @@ module Janky
         ]
 
         ::Janky::ChatService.speak(message, build.room_id, {:color => color, :build => build})
+        if build.room_id != build.repository.room_id
+          ::Janky::ChatService.speak(message, build.repository.room_id, {:color => color, :build => build})
+        end
       end
     end
   end

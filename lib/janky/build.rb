@@ -233,7 +233,7 @@ module Janky
     # Returns the URL as a String.
     def web_url
       return if new_record?
-      self.class.base_url + "#{id}/output"
+      self.url + "console"
     end
 
     # URL of the web page for this build's branch, served by Janky::App.
